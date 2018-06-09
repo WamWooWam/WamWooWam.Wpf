@@ -290,7 +290,7 @@
         <Setter Property="Background" Value="{DynamicResource SystemChromeMediumLowColor}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource SystemBaseLowColor}"/>
         <Setter Property="Foreground" Value="{DynamicResource SystemBaseHighColor}"/>
-        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="Padding" Value="6,3,5,3"/>
