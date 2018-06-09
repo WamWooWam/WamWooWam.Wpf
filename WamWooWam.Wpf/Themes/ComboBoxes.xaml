@@ -287,9 +287,9 @@
     
     <Style TargetType="{x:Type ComboBox}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="Foreground" Value="{DynamicResource SystemBaseHighColor}"/>
         <Setter Property="Background" Value="{DynamicResource SystemChromeMediumLowColor}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource SystemBaseLowColor}"/>
-        <Setter Property="Foreground" Value="{DynamicResource SystemBaseHighColor}"/>
         <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
