@@ -84,7 +84,7 @@ namespace WamWooWam.Wpf
                 {
                     current.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/WamWooWam.Wpf;component/Themes/DarkColours.xaml", UriKind.Absolute) });
                 }
-            }
+            }            
 
             var accentLightness = 0.299 * ((double)accentColour.R / 255) + 0.587 * ((double)accentColour.G / 255) + 0.114 * ((double)accentColour.B / 255);
 

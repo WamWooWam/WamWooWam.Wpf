@@ -12,5 +12,6 @@
         <ResourceDictionary Source="./Lists.xaml"/>
         <ResourceDictionary Source="./Trees.xaml"/>
         <ResourceDictionary Source="./ComboBoxes.xaml"/>
+        <ResourceDictionary Source="./Windows.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
