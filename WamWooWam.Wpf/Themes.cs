@@ -21,12 +21,10 @@ namespace WamWooWam.Wpf
         /// <param name="accentColour">The accent colour the app should use, leave as <see langword="null"/> to use the Windows accent color.</param>
         public static void SetTheme(bool? light = null, Color? accentColour = null)
         {
-            Version version = Environment.OSVersion.Version;
+            EnsureLight(ref light);
+            EnsureAccentColour(ref accentColour);
 
-            EnsureLight(ref light, version);
-            EnsureAccentColour(ref accentColour, version);
-
-            LoadTheme(light.Value, accentColour.Value, version, Application.Current.Resources);
+            LoadTheme(light.Value, accentColour.Value, Application.Current.Resources);
         }
 
         /// <summary>
@@ -37,28 +35,21 @@ namespace WamWooWam.Wpf
         /// <param name="accentColour">The accent colour the app should use, leave as <see langword="null"/> to use the Windows accent color.</param>
         public static void SetTheme(FrameworkElement element, bool? light = null, Color? accentColour = null)
         {
-            Version version = Environment.OSVersion.Version;
+            EnsureLight(ref light);
+            EnsureAccentColour(ref accentColour);
 
-            EnsureLight(ref light, version);
-            EnsureAccentColour(ref accentColour, version);
-
-            LoadTheme(light.Value, accentColour.Value, version, element.Resources);
+            LoadTheme(light.Value, accentColour.Value, element.Resources);
         }
 
-        private static void LoadTheme(bool light, Color accentColour, Version version, ResourceDictionary current)
+        private static void LoadTheme(bool light, Color accentColour, ResourceDictionary current)
         {
             if (light)
             {
-                if (version.Major == 10)
+                if (Misc.IsWindows10)
                 {
                     foreach (var thing in AccentColorSet.ActiveSet.GetAllColorNames().Where(c => c.StartsWith("Light")))
                     {
-                        var col = AccentColorSet.ActiveSet[thing];
-                        var brush = new SolidColorBrush(col);
-                        var str = $"System{thing.Substring(5)}Color";
-
-                        brush.Freeze();
-                        current[str] = brush;
+                        SetColourResource(current, thing, thing.Substring(5));
                     }
                 }
                 else
@@ -68,16 +59,11 @@ namespace WamWooWam.Wpf
             }
             else
             {
-                if (version.Major == 10)
+                if (Misc.IsWindows10)
                 {
                     foreach (var thing in AccentColorSet.ActiveSet.GetAllColorNames().Where(c => c.StartsWith("Dark")))
                     {
-                        var col = AccentColorSet.ActiveSet[thing];
-                        var brush = new SolidColorBrush(col);
-                        var str = $"System{thing.Substring(4)}Color";
-
-                        brush.Freeze();
-                        current[str] = brush;
+                        SetColourResource(current, thing, thing.Substring(4));
                     }
                 }
                 else
@@ -88,19 +74,39 @@ namespace WamWooWam.Wpf
 
             var accentLightness = 0.299 * ((double)accentColour.R / 255) + 0.587 * ((double)accentColour.G / 255) + 0.114 * ((double)accentColour.B / 255);
 
-            current["AccentColor"] = accentColour;
-            current["SystemAccentColor"] = new SolidColorBrush(accentColour);
-            current["SystemAccentForegroundColor"] = new SolidColorBrush(accentLightness > 0.5 ? Colors.Black : Colors.White);
-            current["SystemAccentBackgroundColor"] = new SolidColorBrush(accentColour) { Opacity = 0.5 };
+            current["SystemAccentColor"] = accentColour;
+
+            current["SystemAccentLighten3Brush"] =  new SolidColorBrush(accentColour.Lighten(0.6f));
+            current["SystemAccentLighten2Brush"] =  new SolidColorBrush(accentColour.Lighten(0.4f));
+            current["SystemAccentLighten1Brush"] =  new SolidColorBrush(accentColour.Lighten(0.2f));
+            current["SystemAccentBrush"]         =  new SolidColorBrush(accentColour);
+            current["SystemAccentDarken1Brush"]  =  new SolidColorBrush(accentColour.Darken(0.2f));
+            current["SystemAccentDarken2Brush"]  =  new SolidColorBrush(accentColour.Darken(0.4f));
+            current["SystemAccentDarken3Brush"]  =  new SolidColorBrush(accentColour.Darken(0.6f));
+
+            current["SystemAccentForegroundBrush"] = new SolidColorBrush(accentLightness > 0.5 ? Colors.Black : Colors.White);
+            current["SystemAccentBackgroundBrush"] = new SolidColorBrush(accentColour) { Opacity = 0.5 };
 
             current.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/WamWooWam.Wpf;component/Themes/All.xaml", UriKind.Absolute) });
         }
 
-        private static void EnsureLight(ref bool? light, Version version)
+        private static void SetColourResource(ResourceDictionary current, string colour, string trimmed)
+        {
+            var col = AccentColorSet.ActiveSet[colour];
+            var brush = new SolidColorBrush(col);
+            var colStr = $"System{trimmed}Color";
+            var brushStr = $"System{trimmed}Brush";
+
+            brush.Freeze();
+            current[colStr] = col;
+            current[brushStr] = brush;
+        }
+
+        private static void EnsureLight(ref bool? light)
         {
             if (light == null)
             {
-                if (version.Major == 10)
+                if (Misc.IsWindows10)
                 {
                     try
                     {
@@ -120,11 +126,11 @@ namespace WamWooWam.Wpf
             }
         }
 
-        private static void EnsureAccentColour(ref Color? accentColour, Version version)
+        private static void EnsureAccentColour(ref Color? accentColour)
         {
             if (accentColour == null)
             {
-                if (version.Major == 10)
+                if (Misc.IsWindows10)
                 {
                     try
                     {
@@ -135,7 +141,7 @@ namespace WamWooWam.Wpf
                         accentColour = Color.FromRgb(0x00, 0x78, 0xD7); // default blue
                     }
                 }
-                else if (version.Major == 6)
+                else if (Misc.IsWindows8 || Misc.IsWindows7)
                 {
                     accentColour = SystemParameters.WindowGlassColor;
                 }

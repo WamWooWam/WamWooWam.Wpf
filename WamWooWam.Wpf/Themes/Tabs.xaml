@@ -5,9 +5,9 @@
         <Setter Property="Padding" Value="2"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Foreground" Value="{DynamicResource SystemAltHighColor}"/>
-        <Setter Property="Background" Value="{DynamicResource SystemAltLowColor}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource SystemBaseLowColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource SystemAltHighBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource SystemAltLowBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource SystemBaseLowBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -32,7 +32,6 @@
                             <Setter Property="Grid.Row" TargetName="contentPanel" Value="0"/>
                             <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
                             <Setter Property="Height" TargetName="RowDefinition1" Value="Auto"/>
-                            <Setter Property="Margin" TargetName="headerPanel" Value="2,0,2,2"/>
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Left">
                             <Setter Property="Grid.Row" TargetName="headerPanel" Value="0"/>
@@ -43,7 +42,6 @@
                             <Setter Property="Width" TargetName="ColumnDefinition1" Value="*"/>
                             <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
                             <Setter Property="Height" TargetName="RowDefinition1" Value="0"/>
-                            <Setter Property="Margin" TargetName="headerPanel" Value="2,2,0,2"/>
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Right">
                             <Setter Property="Grid.Row" TargetName="headerPanel" Value="0"/>
@@ -54,7 +52,6 @@
                             <Setter Property="Width" TargetName="ColumnDefinition1" Value="Auto"/>
                             <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
                             <Setter Property="Height" TargetName="RowDefinition1" Value="0"/>
-                            <Setter Property="Margin" TargetName="headerPanel" Value="0,2,2,2"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
@@ -66,9 +63,9 @@
     </Style>
     
     <Style TargetType="{x:Type TabItem}">
-        <Setter Property="Foreground" Value="{DynamicResource SystemBaseHighColor}"/>
-        <Setter Property="Background" Value="{DynamicResource SystemChromeMediumLowColor}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource SystemBaseLowColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource SystemBaseHighBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource SystemChromeMediumLowBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource SystemChromeDisabledHighBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="FontFamily" Value="{DynamicResource Font}"/>
         <Setter Property="Margin" Value="0"/>
@@ -78,9 +75,9 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Grid x:Name="templateRoot" SnapsToDevicePixels="true" Margin="2,0">
-                        <Border x:Name="mainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="2,2,2,0" Background="{TemplateBinding Background}" Margin="0">
-                            <Border x:Name="innerBorder" BorderBrush="{DynamicResource SystemAccentColor}" BorderThickness="2,2,2,0" Background="{DynamicResource SystemAccentColor}" Margin="-1" Opacity="0"/>
+                    <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
+                        <Border x:Name="mainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1,1,1,0" Background="{TemplateBinding Background}" Margin="0">
+                            <Border x:Name="innerBorder" BorderBrush="{DynamicResource SystemAccentBrush}" BorderThickness="1,1,1,0" Background="{DynamicResource SystemAccentBrush}" Margin="-1,-1,-1,0" Opacity="0"/>
                         </Border>
                         <ContentPresenter x:Name="contentPresenter" ContentSource="Header" Focusable="False" HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
                     </Grid>
@@ -90,10 +87,10 @@
                                 <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true"/>
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Top"/>
                             </MultiDataTrigger.Conditions>
-                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource SystemAccentBackgroundColor}"/>
-                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="{DynamicResource SystemAccentColor}"/>
-                            <Setter Property="BorderThickness" TargetName="innerBorder" Value="2,2,2,0"/>
-                            <Setter Property="BorderThickness" TargetName="mainBorder" Value="2,2,2,0"/>
+                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource SystemAccentBackgroundBrush}"/>
+                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="{DynamicResource SystemAccentBrush}"/>
+                            <Setter Property="BorderThickness" TargetName="innerBorder" Value="1,1,1,0"/>
+                            <Setter Property="BorderThickness" TargetName="mainBorder" Value="1,1,1,0"/>
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
@@ -101,18 +98,18 @@
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Top"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Opacity" TargetName="contentPresenter" Value="0.56"/>
-                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource SystemChromeDisabledHighColor}"/>
-                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="{DynamicResource SystemChromeDisabledLowColor}"/>
-                            <Setter Property="BorderThickness" TargetName="innerBorder" Value="2,2,2,0"/>
-                            <Setter Property="BorderThickness" TargetName="mainBorder" Value="2,2,2,0"/>
+                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource SystemChromeDisabledHighBrush}"/>
+                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="{DynamicResource SystemChromeDisabledLowBrush}"/>
+                            <Setter Property="BorderThickness" TargetName="innerBorder" Value="1,1,1,0"/>
+                            <Setter Property="BorderThickness" TargetName="mainBorder" Value="1,1,1,0"/>
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="false"/>
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Top"/>
                             </MultiDataTrigger.Conditions>
-                            <Setter Property="BorderThickness" TargetName="innerBorder" Value="2,2,2,0"/>
-                            <Setter Property="BorderThickness" TargetName="mainBorder" Value="2,2,2,0"/>
+                            <Setter Property="BorderThickness" TargetName="innerBorder" Value="1,1,1,0"/>
+                            <Setter Property="BorderThickness" TargetName="mainBorder" Value="1,1,1,0"/>
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
@@ -121,8 +118,8 @@
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Panel.ZIndex" Value="1"/>
                             <Setter Property="Opacity" TargetName="innerBorder" Value="1"/>
-                            <Setter Property="BorderThickness" TargetName="innerBorder" Value="2,2,2,0"/>
-                            <Setter Property="BorderThickness" TargetName="mainBorder" Value="2,2,2,0"/>
+                            <Setter Property="BorderThickness" TargetName="innerBorder" Value="1,1,1,0"/>
+                            <Setter Property="BorderThickness" TargetName="mainBorder" Value="1,1,1,0"/>
                         </MultiDataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

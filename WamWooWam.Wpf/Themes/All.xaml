@@ -13,5 +13,7 @@
         <ResourceDictionary Source="./Trees.xaml"/>
         <ResourceDictionary Source="./ComboBoxes.xaml"/>
         <ResourceDictionary Source="./Windows.xaml"/>
+        <ResourceDictionary Source="./Slider.xaml"/>
+        <ResourceDictionary Source="./Menus.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

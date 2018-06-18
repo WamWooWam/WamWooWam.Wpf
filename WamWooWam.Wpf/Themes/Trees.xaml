@@ -3,8 +3,8 @@
     
     <Style TargetType="{x:Type TreeView}">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource SystemBaseLowColor}"/>
-        <Setter Property="Foreground" Value="{DynamicResource SystemChromeWhiteColor}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource SystemBaseLowBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource SystemChromeWhiteBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="Padding" Value="1"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
@@ -64,7 +64,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Border Background="Transparent" Height="16" Padding="5,5,5,5" Width="16">
-                        <Path x:Name="ExpandPath" Data="{DynamicResource TreeArrow}" Fill="{DynamicResource SystemChromeHighColor}" StrokeThickness="0">
+                        <Path x:Name="ExpandPath" Data="{DynamicResource TreeArrow}" Fill="{DynamicResource SystemChromeHighBrush}" StrokeThickness="0">
                             <Path.RenderTransform>
                                 <RotateTransform Angle="135" CenterY="2.5" CenterX="2"/>
                             </Path.RenderTransform>
@@ -77,17 +77,17 @@
                                     <RotateTransform Angle="180" CenterY="2.5" CenterX="2.5"/>
                                 </Setter.Value>
                             </Setter>
-                            <Setter Property="Fill" TargetName="ExpandPath" Value="{DynamicResource SystemAccentColor}"/>
+                            <Setter Property="Fill" TargetName="ExpandPath" Value="{DynamicResource SystemAccentBrush}"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Fill" TargetName="ExpandPath" Value="{DynamicResource SystemChromeAltLowColor}"/>
+                            <Setter Property="Fill" TargetName="ExpandPath" Value="{DynamicResource SystemChromeAltLowBrush}"/>
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True"/>
                                 <Condition Property="IsChecked" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Fill" TargetName="ExpandPath" Value="{DynamicResource SystemAccentColor}"/>
+                            <Setter Property="Fill" TargetName="ExpandPath" Value="{DynamicResource SystemAccentBrush}"/>
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -102,7 +102,7 @@
         <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
         <Setter Property="Padding" Value="1"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Foreground" Value="{DynamicResource SystemBaseHighColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource SystemBaseHighBrush}"/>
         <Setter Property="FocusVisualStyle" Value="{DynamicResource TreeViewItemFocusVisual}"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -131,16 +131,16 @@
                             <Setter Property="Visibility" TargetName="Expander" Value="Hidden"/>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="true">
-                            <Setter Property="Background" TargetName="Bd" Value="{DynamicResource SystemAccentColor}"/>
-                            <Setter Property="Foreground" Value="{DynamicResource SystemAccentForegroundColor}"/>
+                            <Setter Property="Background" TargetName="Bd" Value="{DynamicResource SystemAccentBrush}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource SystemAccentForegroundBrush}"/>
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsSelected" Value="true"/>
                                 <Condition Property="IsSelectionActive" Value="false"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" TargetName="Bd" Value="{DynamicResource SystemAccentBackgroundColor}"/>
-                            <Setter Property="BorderBrush" TargetName="Bd" Value="{DynamicResource SystemAccentBackgroundColor}"/>
+                            <Setter Property="Background" TargetName="Bd" Value="{DynamicResource SystemAccentBackgroundBrush}"/>
+                            <Setter Property="BorderBrush" TargetName="Bd" Value="{DynamicResource SystemAccentBackgroundBrush}"/>
                         </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>

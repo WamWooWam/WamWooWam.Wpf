@@ -5,8 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WamWooWam.Wpf.Test"
         mc:Ignorable="d" Style="{DynamicResource WindowStyle}"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="480" Width="854">
     <Grid>
-        
+        <StackPanel VerticalAlignment="Center">
+            <Button x:Name="btn" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Tee hee hee! Content!">
+                Tee hee hee! Content!
+            </Button>
+            <Slider Margin="10"/>
+        </StackPanel>
     </Grid>
 </Window>

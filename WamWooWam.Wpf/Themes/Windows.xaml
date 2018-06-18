@@ -2,12 +2,17 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style x:Key="PageStyle" BasedOn="{StaticResource {x:Type Page}}" TargetType="{x:Type Page}">
-        <Setter Property="Foreground" Value="{DynamicResource SystemBaseHighColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource SystemBaseHighBrush}"/>
     </Style>
 
+    <Style x:Key="FullPageStyle" BasedOn="{StaticResource {x:Type Page}}" TargetType="{x:Type Page}">
+        <Setter Property="Foreground" Value="{DynamicResource SystemBaseHighBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource SystemChromeLowBrush}"/>
+    </Style>
+    
     <Style x:Key="WindowStyle" BasedOn="{StaticResource {x:Type Window}}" TargetType="{x:Type Window}">
-        <Setter Property="Foreground" Value="{DynamicResource SystemBaseHighColor}"/>
-        <Setter Property="Background" Value="{DynamicResource SystemChromeLowColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource SystemBaseHighBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource SystemChromeLowBrush}"/>
     </Style>
     
 </ResourceDictionary>
