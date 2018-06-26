@@ -13,9 +13,11 @@ using WamWooWam.Wpf.Themes;
 Themes.SetTheme();
 ```
 
+There, done! That was easy, wasn't it.
+
 #### Light/Dark mode
 
-If you want to enforce a specific mode, you can do something a la:
+If you want to enforce a specific light/dark mode, you can do something a la:
 ```cs
 // Enforce light theme
 Themes.SetTheme(light: true);
@@ -27,7 +29,23 @@ If not, all's g, we'll try and grab the current user's theme on Windows 10, or d
 If you want to enforce a specific accent colour, like a specific brand colour, you can do something like:
 ```cs
 // Set theme colour to Discord Blurple
-Themes.SetTheme(accentColour: Color.FromRgb(0x72, 0x89, 0xDA)); 
+Themes.SetTheme(accentColour: Color.FromArgb(0xFF, 0x72, 0x89, 0xDA)); 
 ```
 If you don't do this, no matter, we'll try and grab the current Windows accent colour instead, which works 99% of the time.
 
+#### Additional Customisation
+If you want a little more control over how things look, you can use the new `ThemeConfiguration` class, like so:
+
+```cs
+var config = new ThemeConfiguration
+{
+    ColourMode = ThemeColourMode.Light,
+    AccentColour = Color.FromArgb(0xFF, 0x72, 0x89, 0xDA),
+    FontFamily = new FontFamily("Comic Sans MS"),
+    FontSize = 14
+};
+
+Themes.SetTheme(config);
+```
+
+This class is also, theoretically, serialisable, meaning it's probably possible to store it as a JSON or XML document for easy saving of user settings. I haven't tested this, however.
