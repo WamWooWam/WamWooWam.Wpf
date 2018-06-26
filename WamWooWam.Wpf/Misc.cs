@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace WamWooWam.Wpf
 {
-    internal static class Misc
+    public static class Misc
     {
         internal static Lazy<Version> _osVersionLazy = new Lazy<Version>(() => Environment.OSVersion.Version);
 

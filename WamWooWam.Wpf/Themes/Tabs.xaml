@@ -6,7 +6,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="{DynamicResource SystemAltHighBrush}"/>
-        <Setter Property="Background" Value="{DynamicResource SystemAltLowBrush}"/>
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="{DynamicResource SystemBaseLowBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="Template">

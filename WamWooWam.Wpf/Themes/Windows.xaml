@@ -3,16 +3,22 @@
 
     <Style x:Key="PageStyle" BasedOn="{StaticResource {x:Type Page}}" TargetType="{x:Type Page}">
         <Setter Property="Foreground" Value="{DynamicResource SystemBaseHighBrush}"/>
+        <Setter Property="TextElement.FontSize" Value="{DynamicResource SystemFontSize}"/>
+        <Setter Property="TextElement.FontFamily" Value="{DynamicResource SystemFontFamily}"/>
     </Style>
 
     <Style x:Key="FullPageStyle" BasedOn="{StaticResource {x:Type Page}}" TargetType="{x:Type Page}">
         <Setter Property="Foreground" Value="{DynamicResource SystemBaseHighBrush}"/>
         <Setter Property="Background" Value="{DynamicResource SystemChromeLowBrush}"/>
+        <Setter Property="TextElement.FontSize" Value="{DynamicResource SystemFontSize}"/>
+        <Setter Property="TextElement.FontFamily" Value="{DynamicResource SystemFontFamily}"/>
     </Style>
     
     <Style x:Key="WindowStyle" BasedOn="{StaticResource {x:Type Window}}" TargetType="{x:Type Window}">
         <Setter Property="Foreground" Value="{DynamicResource SystemBaseHighBrush}"/>
         <Setter Property="Background" Value="{DynamicResource SystemChromeLowBrush}"/>
+        <Setter Property="TextElement.FontSize" Value="{DynamicResource SystemFontSize}"/>
+        <Setter Property="TextElement.FontFamily" Value="{DynamicResource SystemFontFamily}"/>
     </Style>
     
 </ResourceDictionary>

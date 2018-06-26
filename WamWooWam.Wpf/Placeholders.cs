@@ -29,7 +29,7 @@ namespace WamWooWam.Wpf.Utilities
         /// <summary>
         /// Dictionary of ItemsControls
         /// </summary>
-        private static readonly Dictionary<object, ItemsControl> itemsControls = new Dictionary<object, ItemsControl>();
+        private static readonly Dictionary<object, ItemsControl> _itemsControls = new Dictionary<object, ItemsControl>();
 
         #endregion
 
@@ -88,7 +88,7 @@ namespace WamWooWam.Wpf.Utilities
 
                 // for Items property  
                 i.ItemContainerGenerator.ItemsChanged += ItemsChanged;
-                itemsControls.Add(i.ItemContainerGenerator, i);
+                _itemsControls.Add(i.ItemContainerGenerator, i);
 
                 // for ItemsSource property  
                 DependencyPropertyDescriptor prop = DependencyPropertyDescriptor.FromProperty(ItemsControl.ItemsSourceProperty, i.GetType());
@@ -163,7 +163,7 @@ namespace WamWooWam.Wpf.Utilities
         private static void ItemsChanged(object sender, ItemsChangedEventArgs e)
         {
             ItemsControl control;
-            if (itemsControls.TryGetValue(sender, out control))
+            if (_itemsControls.TryGetValue(sender, out control))
             {
                 if (ShouldShowPlaceholder(control))
                 {
@@ -261,7 +261,7 @@ namespace WamWooWam.Wpf.Utilities
         /// <summary>
         /// <see cref="ContentPresenter"/> that holds the Placeholder
         /// </summary>
-        private readonly ContentPresenter contentPresenter;
+        private readonly ContentPresenter _contentPresenter;
 
         #endregion
 
@@ -277,7 +277,7 @@ namespace WamWooWam.Wpf.Utilities
         {
             IsHitTestVisible = false;
 
-            contentPresenter = new ContentPresenter
+            _contentPresenter = new ContentPresenter
             {
                 Content = Placeholder,
                 Opacity = 0.5,
@@ -286,8 +286,8 @@ namespace WamWooWam.Wpf.Utilities
 
             if (Control is ItemsControl && !(Control is ComboBox))
             {
-                contentPresenter.VerticalAlignment = VerticalAlignment.Center;
-                contentPresenter.HorizontalAlignment = HorizontalAlignment.Center;
+                _contentPresenter.VerticalAlignment = VerticalAlignment.Center;
+                _contentPresenter.HorizontalAlignment = HorizontalAlignment.Center;
             }
 
             // Hide the control adorner when the adorned element is hidden
@@ -328,7 +328,7 @@ namespace WamWooWam.Wpf.Utilities
         /// <returns>The child <see cref="Visual"/>.</returns>
         protected override Visual GetVisualChild(int index)
         {
-            return contentPresenter;
+            return _contentPresenter;
         }
 
         /// <summary>
@@ -339,7 +339,7 @@ namespace WamWooWam.Wpf.Utilities
         protected override Size MeasureOverride(Size constraint)
         {
             // Here's the secret to getting the adorner to cover the whole control
-            contentPresenter.Measure(Control.RenderSize);
+            _contentPresenter.Measure(Control.RenderSize);
             return Control.RenderSize;
         }
 
@@ -350,7 +350,7 @@ namespace WamWooWam.Wpf.Utilities
         /// <returns>The actual size used.</returns>
         protected override Size ArrangeOverride(Size finalSize)
         {
-            contentPresenter.Arrange(new Rect(finalSize));
+            _contentPresenter.Arrange(new Rect(finalSize));
             return finalSize;
         }
 

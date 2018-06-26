@@ -15,5 +15,5 @@
         <ResourceDictionary Source="./Windows.xaml"/>
         <ResourceDictionary Source="./Slider.xaml"/>
         <ResourceDictionary Source="./Menus.xaml"/>
-    </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary.MergedDictionaries>    
 </ResourceDictionary>

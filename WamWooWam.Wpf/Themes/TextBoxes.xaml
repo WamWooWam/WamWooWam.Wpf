@@ -5,6 +5,7 @@
         <Setter Property="Background" Value="{DynamicResource SystemChromeMediumLowBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource SystemBaseLowBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource SystemBaseHighBrush}"/>
+        <Setter Property="SelectionBrush" Value="{DynamicResource SystemAccentBrush}"/>
         <Setter Property="Padding" Value="2"/>
         <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
@@ -13,7 +14,7 @@
         <Setter Property="AllowDrop" Value="true"/>
         <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
-        <Setter Property="SelectionBrush" Value="{DynamicResource SystemAccentBrush}"/>
+        <Setter Property="SpellCheck.IsEnabled" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">

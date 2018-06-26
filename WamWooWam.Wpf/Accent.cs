@@ -40,10 +40,39 @@ namespace WamWooWam.Wpf
         WCA_ACCENT_POLICY = 19
     }
 
+    [StructLayout(LayoutKind.Sequential)]
+    public struct DWM_BLURBEHIND
+    {
+        public DWM_BB dwFlags;
+        public bool fEnable;
+        public IntPtr hRgnBlur;
+        public bool fTransitionOnMaximized;
+
+        public DWM_BLURBEHIND(bool enabled)
+        {
+            fEnable = enabled ? true : false;
+            hRgnBlur = IntPtr.Zero;
+            fTransitionOnMaximized = false;
+            dwFlags = DWM_BB.Enable;
+        }
+    }
+
+    [Flags]
+    public enum DWM_BB
+    {
+        Enable = 1,
+        BlurRegion = 2,
+        TransitionMaximized = 4
+    }
+
+
     public static class Accent
     {
         [DllImport("user32.dll")]
         private static extern int SetWindowCompositionAttribute(IntPtr hwnd, ref WindowCompositionAttributeData data);
+
+        [DllImport("dwmapi.dll")]
+        private static extern void DwmEnableBlurBehindWindow(IntPtr hwnd, ref DWM_BLURBEHIND blurBehind);
 
         public static void SetAccentState(IntPtr wind, AccentState state)
         {
@@ -62,6 +91,12 @@ namespace WamWooWam.Wpf
             SetWindowCompositionAttribute(wind, ref data);
 
             Marshal.FreeHGlobal(accentPtr);
+        }
+
+        public static void SetDWMBlurBehind(IntPtr wind, bool enable)
+        {
+            var dwmbb = new DWM_BLURBEHIND(enable);
+            DwmEnableBlurBehindWindow(wind, ref dwmbb);
         }
     }
 }

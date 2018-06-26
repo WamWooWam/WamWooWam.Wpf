@@ -47,5 +47,50 @@ namespace WamWooWam.Wpf
                 return FindLogicalParent<T>(parent);
             }
         }
+
+        public static T GetVisualChild<T>(this DependencyObject parent) where T : DependencyObject
+        {
+            T child = default(T);
+
+            int count = VisualTreeHelper.GetChildrenCount(parent);
+            for (int i = 0; i < count; i++)
+            {
+                Visual v = (Visual)VisualTreeHelper.GetChild(parent, i);
+                child = v as T;
+                if (child == null)
+                {
+                    child = GetVisualChild<T>(v);
+                }
+                if (child != null)
+                {
+                    break;
+                }
+            }
+            return child;
+        }
+
+        public static T FirstVisualChild<T>(this DependencyObject parent, Func<T, bool> precidate) where T : DependencyObject
+        {
+            T child = default(T);
+
+            int count = VisualTreeHelper.GetChildrenCount(parent);
+            for (int i = 0; i < count; i++)
+            {
+                var v = VisualTreeHelper.GetChild(parent, i);
+                if (v is T t && precidate(t))
+                {
+                    return t;
+                }
+                else
+                {
+                    child = FirstVisualChild(v, precidate);
+                    if (child != null)
+                    {
+                        return child;
+                    }
+                }
+            }
+            return child;
+        }
     }
 }

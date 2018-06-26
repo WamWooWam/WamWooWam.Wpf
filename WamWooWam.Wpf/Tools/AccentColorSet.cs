@@ -45,7 +45,10 @@ namespace WamWooWam.Wpf.Tools
             }
             private set
             {
-                if (_activeSet != null) _activeSet.Active = false;
+                if (_activeSet != null)
+                {
+                    _activeSet.Active = false;
+                }
 
                 value.Active = true;
                 _activeSet = value;
@@ -65,7 +68,10 @@ namespace WamWooWam.Wpf.Tools
                 {
                     name = Marshal.StringToHGlobalUni("Immersive" + colorName);
                     colorType = UXTheme.GetImmersiveColorTypeFromName(name);
-                    if (colorType == 0xFFFFFFFF) throw new InvalidOperationException();
+                    if (colorType == 0xFFFFFFFF)
+                    {
+                        throw new InvalidOperationException();
+                    }
                 }
                 finally
                 {
