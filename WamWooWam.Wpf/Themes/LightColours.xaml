@@ -1,39 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <SolidColorBrush x:Key="SystemAltHighBrush" Color="{StaticResource SystemAltHighColor}"/>
-    <SolidColorBrush x:Key="SystemAltLowBrush" Color="{StaticResource SystemAltLowColor}"/>
-    <SolidColorBrush x:Key="SystemAltMediumBrush" Color="{StaticResource SystemAltMediumColor}"/>
-    <SolidColorBrush x:Key="SystemAltMediumHighBrush" Color="{StaticResource SystemAltMediumHighColor}"/>
-    <SolidColorBrush x:Key="SystemAltMediumLowBrush" Color="{StaticResource SystemAltMediumLowColor}"/>
-
-    <SolidColorBrush x:Key="SystemBaseHighBrush" Color="{StaticResource SystemBaseHighColor}"/>
-    <SolidColorBrush x:Key="SystemBaseLowBrush" Color="{StaticResource SystemBaseLowColor}"/>
-    <SolidColorBrush x:Key="SystemBaseMediumBrush" Color="{StaticResource SystemBaseMediumColor}"/>
-    <SolidColorBrush x:Key="SystemBaseMediumHighBrush" Color="{StaticResource SystemBaseMediumHighColor}"/>
-    <SolidColorBrush x:Key="SystemBaseMediumLowBrush" Color="{StaticResource SystemBaseMediumLowColor}"/>
-
-    <SolidColorBrush x:Key="SystemChromeAltLowBrush" Color="{StaticResource SystemChromeAltLowColor}"/>
-    
-    <SolidColorBrush x:Key="SystemChromeBlackHighBrush" Color="{StaticResource SystemChromeBlackHighColor}"/>
-    <SolidColorBrush x:Key="SystemChromeBlackLowBrush" Color="{StaticResource SystemChromeBlackLowColor}"/>
-    <SolidColorBrush x:Key="SystemChromeBlackMediumLowBrush" Color="{StaticResource SystemChromeBlackMediumLowColor}"/>
-    <SolidColorBrush x:Key="SystemChromeBlackMediumBrush" Color="{StaticResource SystemChromeBlackMediumColor}"/>
-    
-    <SolidColorBrush x:Key="SystemChromeDisabledHighBrush" Color="{StaticResource SystemChromeDisabledHighColor}"/>
-    <SolidColorBrush x:Key="SystemChromeDisabledLowBrush" Color="{StaticResource SystemChromeDisabledLowColor}"/>
-    
-    <SolidColorBrush x:Key="SystemChromeHighBrush" Color="{StaticResource SystemChromeHighColor}"/>
-    <SolidColorBrush x:Key="SystemChromeLowBrush" Color="{StaticResource SystemChromeLowColor}"/>
-    <SolidColorBrush x:Key="SystemChromeMediumBrush" Color="{StaticResource SystemChromeMediumColor}"/>
-    <SolidColorBrush x:Key="SystemChromeMediumLowBrush" Color="{StaticResource SystemChromeMediumLowColor}"/>
-    <SolidColorBrush x:Key="SystemChromeWhiteBrush" Color="{StaticResource SystemChromeWhiteColor}"/>
-    <SolidColorBrush x:Key="SystemChromeGrayBrush" Color="{StaticResource SystemChromeGrayColor}"/>
-
-    <SolidColorBrush x:Key="SystemListLowBrush" Color="{StaticResource SystemListLowColor}"/>
-    <SolidColorBrush x:Key="SystemListMediumBrush" Color="{StaticResource SystemListMediumColor}"/>
-    
-
     <Color x:Key="SystemAltHighColor">#FFFFFFFF</Color>
     <Color x:Key="SystemAltLowColor">#33FFFFFF</Color>
     <Color x:Key="SystemAltMediumColor">#99FFFFFF</Color>
@@ -65,5 +32,37 @@
 
     <Color x:Key="SystemListLowColor">#19000000</Color>
     <Color x:Key="SystemListMediumColor">#33000000</Color>
+    
+    <SolidColorBrush x:Key="SystemAltHighBrush" Color="{StaticResource SystemAltHighColor}"/>
+    <SolidColorBrush x:Key="SystemAltLowBrush" Color="{StaticResource SystemAltLowColor}"/>
+    <SolidColorBrush x:Key="SystemAltMediumBrush" Color="{StaticResource SystemAltMediumColor}"/>
+    <SolidColorBrush x:Key="SystemAltMediumHighBrush" Color="{StaticResource SystemAltMediumHighColor}"/>
+    <SolidColorBrush x:Key="SystemAltMediumLowBrush" Color="{StaticResource SystemAltMediumLowColor}"/>
+
+    <SolidColorBrush x:Key="SystemBaseHighBrush" Color="{StaticResource SystemBaseHighColor}"/>
+    <SolidColorBrush x:Key="SystemBaseLowBrush" Color="{StaticResource SystemBaseLowColor}"/>
+    <SolidColorBrush x:Key="SystemBaseMediumBrush" Color="{StaticResource SystemBaseMediumColor}"/>
+    <SolidColorBrush x:Key="SystemBaseMediumHighBrush" Color="{StaticResource SystemBaseMediumHighColor}"/>
+    <SolidColorBrush x:Key="SystemBaseMediumLowBrush" Color="{StaticResource SystemBaseMediumLowColor}"/>
+
+    <SolidColorBrush x:Key="SystemChromeAltLowBrush" Color="{StaticResource SystemChromeAltLowColor}"/>
+    
+    <SolidColorBrush x:Key="SystemChromeBlackHighBrush" Color="{StaticResource SystemChromeBlackHighColor}"/>
+    <SolidColorBrush x:Key="SystemChromeBlackLowBrush" Color="{StaticResource SystemChromeBlackLowColor}"/>
+    <SolidColorBrush x:Key="SystemChromeBlackMediumLowBrush" Color="{StaticResource SystemChromeBlackMediumLowColor}"/>
+    <SolidColorBrush x:Key="SystemChromeBlackMediumBrush" Color="{StaticResource SystemChromeBlackMediumColor}"/>
+    
+    <SolidColorBrush x:Key="SystemChromeDisabledHighBrush" Color="{StaticResource SystemChromeDisabledHighColor}"/>
+    <SolidColorBrush x:Key="SystemChromeDisabledLowBrush" Color="{StaticResource SystemChromeDisabledLowColor}"/>
+    
+    <SolidColorBrush x:Key="SystemChromeHighBrush" Color="{StaticResource SystemChromeHighColor}"/>
+    <SolidColorBrush x:Key="SystemChromeLowBrush" Color="{StaticResource SystemChromeLowColor}"/>
+    <SolidColorBrush x:Key="SystemChromeMediumBrush" Color="{StaticResource SystemChromeMediumColor}"/>
+    <SolidColorBrush x:Key="SystemChromeMediumLowBrush" Color="{StaticResource SystemChromeMediumLowColor}"/>
+    <SolidColorBrush x:Key="SystemChromeWhiteBrush" Color="{StaticResource SystemChromeWhiteColor}"/>
+    <SolidColorBrush x:Key="SystemChromeGrayBrush" Color="{StaticResource SystemChromeGrayColor}"/>
+
+    <SolidColorBrush x:Key="SystemListLowBrush" Color="{StaticResource SystemListLowColor}"/>
+    <SolidColorBrush x:Key="SystemListMediumBrush" Color="{StaticResource SystemListMediumColor}"/>
 
 </ResourceDictionary>

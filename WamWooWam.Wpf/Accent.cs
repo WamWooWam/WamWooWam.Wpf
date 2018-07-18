@@ -6,66 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
+using WamWooWam.Wpf.Interop;
 
 namespace WamWooWam.Wpf
-{
-    public enum AccentState
-    {
-        Disabled = 1,
-        EnableGradient = 0,
-        EnableTransparentGradient = 2,
-        EnableBlurBehind = 3,
-        Invalid = 4
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct AccentPolicy
-    {
-        public AccentState AccentState;
-        public int AccentFlags;
-        public int GradientColor;
-        public int AnimationId;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct WindowCompositionAttributeData
-    {
-        public WindowCompositionAttribute Attribute;
-        public IntPtr Data;
-        public int SizeOfData;
-    }
-
-    public enum WindowCompositionAttribute
-    {
-        WCA_ACCENT_POLICY = 19
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct DWM_BLURBEHIND
-    {
-        public DWM_BB dwFlags;
-        public bool fEnable;
-        public IntPtr hRgnBlur;
-        public bool fTransitionOnMaximized;
-
-        public DWM_BLURBEHIND(bool enabled)
-        {
-            fEnable = enabled ? true : false;
-            hRgnBlur = IntPtr.Zero;
-            fTransitionOnMaximized = false;
-            dwFlags = DWM_BB.Enable;
-        }
-    }
-
-    [Flags]
-    public enum DWM_BB
-    {
-        Enable = 1,
-        BlurRegion = 2,
-        TransitionMaximized = 4
-    }
-
-
+{ 
     public static class Accent
     {
         [DllImport("user32.dll")]

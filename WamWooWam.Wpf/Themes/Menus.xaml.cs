@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
+using WamWooWam.Wpf.Interop;
 
 namespace WamWooWam.Wpf.Theme
 {

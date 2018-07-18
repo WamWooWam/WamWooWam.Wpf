@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -51,6 +52,8 @@ namespace WamWooWam.Wpf
         {
             CurrentConfiguration = config;
 
+            var asm = Assembly.GetExecutingAssembly().GetName();
+
             current["SystemFontFamily"] = config.FontFamily;
             current["SystemFontSize"] = config.FontSize;
 
@@ -68,7 +71,7 @@ namespace WamWooWam.Wpf
                 }
                 else
                 {
-                    current.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/WamWooWam.Wpf;component/Themes/LightColours.xaml", UriKind.Absolute) });
+                    current.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri($"pack://application:,,,/{asm.Name};component/Themes/LightColours.xaml", UriKind.Absolute) });
                 }
             }
             else
@@ -82,7 +85,7 @@ namespace WamWooWam.Wpf
                 }
                 else
                 {
-                    current.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/WamWooWam.Wpf;component/Themes/DarkColours.xaml", UriKind.Absolute) });
+                    current.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri($"pack://application:,,,/{asm.Name};component/Themes/DarkColours.xaml", UriKind.Absolute) });
                 }
             }
 
@@ -102,7 +105,8 @@ namespace WamWooWam.Wpf
             current["SystemAccentForegroundBrush"] = new SolidColorBrush(accentLightness > 0.5 ? Colors.Black : Colors.White);
             current["SystemAccentBackgroundBrush"] = new SolidColorBrush(accent) { Opacity = 0.5 };
 
-            current.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/WamWooWam.Wpf;component/Themes/All.xaml", UriKind.Absolute) });
+            if (!config.NoLoad)
+                current.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri($"pack://application:,,,/{asm.Name};component/Themes/All.xaml", UriKind.Absolute) });
         }
 
         private static void SetColourResource(ResourceDictionary current, string colour, string trimmed)
@@ -150,6 +154,8 @@ namespace WamWooWam.Wpf
         public FontFamily MonospaceFontFamily { get; set; }
         public double FontSize { get; set; }
         public double MonospaceFontSize { get; set; }
+
+        public bool NoLoad { get; set; }
 
         internal Color GetAccentColour()
         {
