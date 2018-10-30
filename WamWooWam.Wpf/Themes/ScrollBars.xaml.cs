@@ -8,7 +8,6 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Interop;
 using System.Windows.Media;
-using WamWooWam.Core;
 
 namespace WamWooWam.Wpf.Theme
 {
