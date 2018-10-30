@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Interop;
 using System.Windows.Media;
+using WamWooWam.Core;
 
 namespace WamWooWam.Wpf.Theme
 {
@@ -18,9 +19,11 @@ namespace WamWooWam.Wpf.Theme
             InitializeComponent();
         }
 
-        private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
-        {
-
-        }
+        //private void ScrollViewer_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        //{
+        //    var scrollViewer = sender as ScrollViewer;
+        //    scrollViewer.ScrollToVerticalOffset((scrollViewer.VerticalOffset - (e.Delta * 1.5)).Clamp(0, scrollViewer.ScrollableHeight));
+        //    e.Handled = true;
+        //}
     }
 }

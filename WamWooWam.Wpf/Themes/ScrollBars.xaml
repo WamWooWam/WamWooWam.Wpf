@@ -240,7 +240,6 @@
     </Style>
 
     <Style TargetType="ScrollViewer" BasedOn="{StaticResource {x:Type ScrollViewer}}">
-        <EventSetter Event="ScrollChanged" Handler="ScrollViewer_ScrollChanged"/>
         <Setter Property="Template" Value="{StaticResource ScrollViewerTemplate}"/>
     </Style>
     

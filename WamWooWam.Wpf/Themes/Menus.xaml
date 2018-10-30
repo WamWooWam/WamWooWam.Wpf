@@ -3,8 +3,8 @@
                     x:Class="WamWooWam.Wpf.Theme.Menus" x:ClassModifier="public">
 
     <Style TargetType="{x:Type ContextMenu}">
-        <Setter Property="BorderThickness" Value="2"/>
-        <Setter Property="HasDropShadow" Value="False"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HasDropShadow" Value="True"/>
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Foreground" Value="{DynamicResource SystemBaseHighBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource SystemBaseLowBrush}"/>
@@ -63,14 +63,16 @@
                             <!-- The Grid is used to hold together columns for an Icon, Content, Glyph checkmark and Arrow to show the next level
                              Size sharing is used in Grid so that the Icon, Content, Arrow for each MenuItem align together -->
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition MinWidth="17" Width="Auto" SharedSizeGroup="MenuItemIconColumnGroup"/>
+                                <ColumnDefinition MinWidth="20" Width="Auto" SharedSizeGroup="MenuItemIconColumnGroup"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemIGTColumnGroup"/>
                                 <ColumnDefinition Width="14"/>
                             </Grid.ColumnDefinitions>
 
                             <!-- ContentPresenter to show an Icon if needed -->
-                            <ContentPresenter Margin="4,0,6,0" x:Name="Icon" VerticalAlignment="Center" ContentSource="Icon"/>
+                            <Border Margin="4,2,12,4" VerticalAlignment="Center">
+                                <ContentPresenter x:Name="Icon" ContentSource="Icon" MinWidth="16" MinHeight="18"/>
+                            </Border>
 
                             <!-- Glyph is a checkmark if needed for a checkable menu -->
                             <Grid Visibility="Collapsed" Margin="4,0,4,0" x:Name="GlyphPanel" VerticalAlignment="Center">
@@ -78,7 +80,7 @@
                             </Grid>
 
                             <!-- Content for the menu text etc -->
-                            <ContentPresenter Grid.Column="1" Margin="{TemplateBinding Padding}" x:Name="HeaderHost" RecognizesAccessKey="True" ContentSource="Header"/>
+                            <ContentPresenter Grid.Column="1" Margin="{TemplateBinding Padding}" x:Name="HeaderHost" RecognizesAccessKey="True" VerticalAlignment="Center" ContentSource="Header"/>
 
                             <!-- Arrow drawn path which points to the next level of the menu -->
                             <Grid Grid.Column="3" Margin="4,0,4,0" x:Name="ArrowPanel" VerticalAlignment="Center">
@@ -135,15 +137,11 @@
                             <Setter Property="MinWidth" Value="100"/>
                             <Setter Property="Visibility" Value="Collapsed" TargetName="ArrowPanel"/>
                         </Trigger>
+                        
                         <Trigger Property="IsSuspendingPopupAnimation" Value="true">
                             <Setter Property="PopupAnimation" Value="None" TargetName="SubMenuPopup"/>
                         </Trigger>
-
-                        <!-- If no Icon is present the we collapse the Icon Content -->
-                        <Trigger Property="Icon" Value="{x:Null}">
-                            <Setter Property="Visibility" Value="Collapsed" TargetName="Icon"/>
-                        </Trigger>
-
+                        
                         <!-- The GlyphPanel contains the CheckMark -->
                         <Trigger Property="IsChecked" Value="true">
                             <Setter Property="Visibility" Value="Visible" TargetName="GlyphPanel"/>

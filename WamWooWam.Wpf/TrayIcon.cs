@@ -344,7 +344,7 @@ namespace WamWooWam.Wpf
 
         private void OnBalloonTipClicked()
         {
-            EventHandler eventHandler = (EventHandler)Events[EVENT_BALLOONTIPCLICKED];
+            var eventHandler = (EventHandler)Events[EVENT_BALLOONTIPCLICKED];
             if (eventHandler == null)
                 return;
             eventHandler(this, EventArgs.Empty);
@@ -363,7 +363,7 @@ namespace WamWooWam.Wpf
 
         private void OnBalloonTipClosed()
         {
-            EventHandler eventHandler = (EventHandler)Events[EVENT_BALLOONTIPCLOSED];
+            var eventHandler = (EventHandler)Events[EVENT_BALLOONTIPCLOSED];
             if (eventHandler == null)
                 return;
             eventHandler(this, EventArgs.Empty);
@@ -371,7 +371,7 @@ namespace WamWooWam.Wpf
 
         private void OnBalloonTipShown()
         {
-            EventHandler eventHandler = (EventHandler)Events[EVENT_BALLOONTIPSHOWN];
+            var eventHandler = (EventHandler)Events[EVENT_BALLOONTIPSHOWN];
             if (eventHandler == null)
                 return;
             eventHandler(this, EventArgs.Empty);
@@ -379,7 +379,7 @@ namespace WamWooWam.Wpf
 
         private void OnMouseClick(MouseEventArgs mea)
         {
-            MouseEventHandler mouseEventHandler = (MouseEventHandler)Events[EVENT_MOUSECLICK];
+            var mouseEventHandler = (MouseEventHandler)Events[EVENT_MOUSECLICK];
             if (mouseEventHandler == null)
                 return;
             mouseEventHandler(this, mea);
@@ -387,7 +387,7 @@ namespace WamWooWam.Wpf
 
         private void OnMouseDoubleClick(MouseEventArgs mea)
         {
-            MouseEventHandler mouseEventHandler = (MouseEventHandler)Events[EVENT_MOUSEDOUBLECLICK];
+            var mouseEventHandler = (MouseEventHandler)Events[EVENT_MOUSEDOUBLECLICK];
             if (mouseEventHandler == null)
                 return;
             mouseEventHandler(this, mea);
@@ -395,7 +395,7 @@ namespace WamWooWam.Wpf
 
         private void OnMouseDown(MouseEventArgs e)
         {
-            MouseEventHandler mouseEventHandler = (MouseEventHandler)Events[EVENT_MOUSEDOWN];
+            var mouseEventHandler = (MouseEventHandler)Events[EVENT_MOUSEDOWN];
             if (mouseEventHandler == null)
                 return;
             mouseEventHandler(this, e);
@@ -403,7 +403,7 @@ namespace WamWooWam.Wpf
 
         private void OnMouseMove(MouseEventArgs e)
         {
-            MouseEventHandler mouseEventHandler = (MouseEventHandler)Events[EVENT_MOUSEMOVE];
+            var mouseEventHandler = (MouseEventHandler)Events[EVENT_MOUSEMOVE];
             if (mouseEventHandler == null)
                 return;
             mouseEventHandler(this, e);
@@ -411,7 +411,7 @@ namespace WamWooWam.Wpf
 
         private void OnMouseUp(MouseEventArgs e)
         {
-            MouseEventHandler mouseEventHandler = (MouseEventHandler)Events[EVENT_MOUSEUP];
+            var mouseEventHandler = (MouseEventHandler)Events[EVENT_MOUSEUP];
             if (mouseEventHandler == null)
                 return;
             mouseEventHandler(this, e);
@@ -581,7 +581,7 @@ namespace WamWooWam.Wpf
                     throw new ArgumentOutOfRangeException("text", text.Length, "Text should be less than 64 chars");
             }
 
-            NOTIFYICONDATA4 data = new NOTIFYICONDATA4();
+            var data = new NOTIFYICONDATA4();
             InitNotifyIconData(ref data);
             data.szInfoTitle = caption;
             data.szInfo = text;
@@ -648,7 +648,7 @@ namespace WamWooWam.Wpf
                     throw new ArgumentOutOfRangeException("text", text.Length, "Text should be less than 64 chars");
             }
 
-            NOTIFYICONDATA4 data = new NOTIFYICONDATA4();
+            var data = new NOTIFYICONDATA4();
             InitNotifyIconData(ref data);
             data.szInfoTitle = caption;
             data.szInfo = text;
@@ -675,7 +675,7 @@ namespace WamWooWam.Wpf
         /// <remarks>Works only on Win7 and later. Will return <see cref="Cursor.Position"/> when running on earlier OS</remarks>
         public Point GetIconPosition()
         {
-            NOTIFYICONIDENTIFIER ident = new NOTIFYICONIDENTIFIER
+            var ident = new NOTIFYICONIDENTIFIER
             {
                 cbSize = (uint)Marshal.SizeOf(typeof(NOTIFYICONIDENTIFIER)),
                 hWnd = _ownerForm.Handle,
@@ -683,8 +683,8 @@ namespace WamWooWam.Wpf
             };
             //ident.guidItem = guid; // don't know why, but setting GUID produces "The parameter is incorrect" HRESULT
 
-            Rectangle rect = new Rectangle();
-            int result = Shell_NotifyIconGetRect(ref ident, ref rect);
+            var rect = new Rectangle();
+            var result = Shell_NotifyIconGetRect(ref ident, ref rect);
             if (result != 0)
                 throw new Win32Exception(result);
 
@@ -697,7 +697,7 @@ namespace WamWooWam.Wpf
         /// </summary>
         public void SetFocus()
         {
-            NOTIFYICONDATA data = new NOTIFYICONDATA();
+            var data = new NOTIFYICONDATA();
             InitNotifyIconData(ref data);
             Shell_NotifyIcon(NotifyIconMessages.SetFocus, data);
         }
@@ -706,7 +706,7 @@ namespace WamWooWam.Wpf
 
         private void ShowBalloonTipLegacy(string caption, string text, NotifyIconIcons balloonIcon, bool noSound = false, bool realTime = false)
         {
-            NOTIFYICONDATA data = new NOTIFYICONDATA();
+            var data = new NOTIFYICONDATA();
             InitNotifyIconData(ref data);
             data.szInfoTitle = caption;
             data.szInfo = text;
@@ -763,7 +763,7 @@ namespace WamWooWam.Wpf
             if (DesignMode)
                 return;
 
-            NOTIFYICONDATA4 data = new NOTIFYICONDATA4();
+            var data = new NOTIFYICONDATA4();
             InitNotifyIconData(ref data);
 
             if (!_iconAdded)
@@ -792,7 +792,7 @@ namespace WamWooWam.Wpf
 
         private void UpdateIconLegacy()
         {
-            NOTIFYICONDATA data = new NOTIFYICONDATA();
+            var data = new NOTIFYICONDATA();
             InitNotifyIconData(ref data);
 
             if (!_iconAdded)
@@ -818,7 +818,7 @@ namespace WamWooWam.Wpf
             if (!_iconAdded)
                 return;
 
-            NOTIFYICONDATA4 data = new NOTIFYICONDATA4();
+            var data = new NOTIFYICONDATA4();
             InitNotifyIconData(ref data);
 
             if (!Shell_NotifyIcon(NotifyIconMessages.Delete, data))
@@ -832,7 +832,7 @@ namespace WamWooWam.Wpf
                 return;
             if (!_iconAdded)
                 return;
-            NOTIFYICONDATA data = new NOTIFYICONDATA();
+            var data = new NOTIFYICONDATA();
             InitNotifyIconData(ref data);
 
             if (!Shell_NotifyIcon(NotifyIconMessages.Delete, data))
@@ -849,7 +849,7 @@ namespace WamWooWam.Wpf
                 return;
             }
 
-            EventHandler eventHandler = (EventHandler)Events[EVENT_CONTEXTMENUSHOW];
+            var eventHandler = (EventHandler)Events[EVENT_CONTEXTMENUSHOW];
             if (eventHandler == null)
                 return;
             eventHandler(this, EventArgs.Empty);

@@ -21,17 +21,27 @@ namespace WamWooWam.Wpf.Theme
 
         private void ToolTip_Loaded(object sender, RoutedEventArgs e)
         {
-            if (Misc.IsWindows10)
+            if (OSVersion.IsWindows10)
             {
                 var s = (sender as ToolTip);
-                var res = s.FindResource("SystemChromeLowBrush") as SolidColorBrush;
-                var c = res.Clone();
-                c.Opacity = 0.66;
 
-                s.Background = c;
-                
-                HwndSource source = (HwndSource)HwndSource.FromVisual(s);
-                Accent.SetAccentState(source.Handle, AccentState.EnableBlurBehind);
+                var res = s.FindResource("SystemChromeLowBrush") as SolidColorBrush;
+                var col = res.Color;
+
+                if (!OSVersion.IsWindows10AprilUpdate)
+                {
+                    var c = res.Clone();
+                    c.Opacity = 0.66;
+                    s.Background = c;
+                }
+                else
+                {
+                    col.A = 128;
+                    s.Background = Brushes.Transparent;
+                }
+
+                var source = (HwndSource)PresentationSource.FromVisual(s);
+                Accent.SetAccentState(source.Handle, AccentState.ACCENT_ENABLE_ACRYLICBLURBEHIND, col);
             }
         }
     }

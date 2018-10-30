@@ -32,11 +32,12 @@
 
     <Style TargetType="{x:Type ToolTip}">
         <Setter Property="Foreground" Value="{DynamicResource SystemBaseHighBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource SystemBaseLowBrush}"/>
         <Setter Property="Background" Value="{DynamicResource SystemChromeLowBrush}"/>
 
-        <Setter Property="BorderThickness" Value="2"/>
-        <Setter Property="Padding" Value="10,7.5"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="10,8"/>
+        <Setter Property="FontSize" Value="9pt"/>
+        <Setter Property="HasDropShadow" Value="True"/>
 
         <EventSetter Event="Loaded" Handler="ToolTip_Loaded"/>
     </Style>

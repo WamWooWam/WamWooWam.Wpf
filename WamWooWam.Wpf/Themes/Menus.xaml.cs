@@ -20,17 +20,29 @@ namespace WamWooWam.Wpf.Theme
 
         private void ContextMenu_Loaded(object sender, RoutedEventArgs e)
         {
-            if (Misc.IsWindows10)
+            if (OSVersion.IsWindows10)
             {
-                var s = (sender as ContextMenu);
+                var s = sender as ContextMenu;                
                 var res = s.FindResource("SystemChromeLowBrush") as SolidColorBrush;
-                var c = res.Clone();
-                c.Opacity = 0.66;
+                var col = res.Color;
 
-                s.Background = c;
+                if (!OSVersion.IsWindows10AprilUpdate)
+                {
+                    var c = res.Clone();
+                    c.Opacity = 0.66;
+                    s.Background = c;
+                }
+                else
+                {
+                    col.A = 127;
 
-                HwndSource source = (HwndSource)HwndSource.FromVisual(s);
-                Accent.SetAccentState(source.Handle, AccentState.EnableBlurBehind);
+                    var c = res.Clone();
+                    c.Opacity = 0.01;
+                    s.Background = c;
+                }
+
+                var source = (HwndSource)PresentationSource.FromVisual(s);
+                Accent.SetAccentState(source.Handle, AccentState.ACCENT_ENABLE_ACRYLICBLURBEHIND, col);
             }
         }
 

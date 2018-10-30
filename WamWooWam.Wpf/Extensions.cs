@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 
@@ -12,7 +8,7 @@ namespace WamWooWam.Wpf
     {
         public static T FindVisualParent<T>(this DependencyObject obj) where T : DependencyObject
         {
-            DependencyObject parent = VisualTreeHelper.GetParent(obj);
+            var parent = VisualTreeHelper.GetParent(obj);
 
             if (parent == null)
             {
@@ -31,7 +27,7 @@ namespace WamWooWam.Wpf
 
         public static T FindLogicalParent<T>(this DependencyObject obj) where T : DependencyObject
         {
-            DependencyObject parent = LogicalTreeHelper.GetParent(obj);
+            var parent = LogicalTreeHelper.GetParent(obj);
 
             if (parent == null)
             {
@@ -50,12 +46,12 @@ namespace WamWooWam.Wpf
 
         public static T GetVisualChild<T>(this DependencyObject parent) where T : DependencyObject
         {
-            T child = default(T);
+            var child = default(T);
 
-            int count = VisualTreeHelper.GetChildrenCount(parent);
-            for (int i = 0; i < count; i++)
+            var count = VisualTreeHelper.GetChildrenCount(parent);
+            for (var i = 0; i < count; i++)
             {
-                Visual v = (Visual)VisualTreeHelper.GetChild(parent, i);
+                var v = (Visual)VisualTreeHelper.GetChild(parent, i);
                 child = v as T;
                 if (child == null)
                 {
@@ -71,10 +67,10 @@ namespace WamWooWam.Wpf
 
         public static T FirstVisualChild<T>(this DependencyObject parent, Func<T, bool> precidate) where T : DependencyObject
         {
-            T child = default(T);
+            var child = default(T);
 
-            int count = VisualTreeHelper.GetChildrenCount(parent);
-            for (int i = 0; i < count; i++)
+            var count = VisualTreeHelper.GetChildrenCount(parent);
+            for (var i = 0; i < count; i++)
             {
                 var v = VisualTreeHelper.GetChild(parent, i);
                 if (v is T t && precidate(t))

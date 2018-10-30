@@ -59,54 +59,56 @@ namespace WamWooWam.Wpf
 
             current["SystemMonospaceFontFamily"] = config.MonospaceFontFamily;
             current["SystemMonospaceFontSize"] = config.MonospaceFontSize;
+            var colourResources = GetColourResources(config, asm);
+            current.MergedDictionaries.Add(colourResources);
 
-            if (config.GetColourMode() == ThemeColourMode.Light)
+            SystemEvents.UserPreferenceChanged += (o, e) =>
             {
-                if (Misc.IsWindows10)
+                if (e.Category == UserPreferenceCategory.General)
                 {
-                    foreach (var thing in AccentColorSet.ActiveSet.GetAllColorNames().Where(c => c.StartsWith("Light")))
+                    current.MergedDictionaries.Remove(colourResources);
+                    colourResources = GetColourResources(config, asm);
+                    current.MergedDictionaries.Add(colourResources);
+
+                    foreach (var item in Application.Current.Windows.OfType<Window>())
                     {
-                        SetColourResource(current, thing, thing.Substring(5));
+                        item.InvalidateVisual();
                     }
                 }
-                else
-                {
-                    current.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri($"pack://application:,,,/{asm.Name};component/Themes/LightColours.xaml", UriKind.Absolute) });
-                }
+            };
+
+            if (!config.NoLoad)
+                current.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri($"pack://application:,,,/{asm.Name};component/Themes/All.xaml", UriKind.Absolute) });
+        }
+
+        private static ResourceDictionary GetColourResources(ThemeConfiguration config, AssemblyName asm)
+        {
+            var colourResources = new ResourceDictionary();
+            if (config.GetColourMode() == ThemeColourMode.Light)
+            {
+                colourResources.MergedDictionaries.Add( new ResourceDictionary() { Source = new Uri($"pack://application:,,,/{asm.Name};component/Themes/LightColours.xaml", UriKind.Absolute) });
             }
             else
             {
-                if (Misc.IsWindows10)
-                {
-                    foreach (var thing in AccentColorSet.ActiveSet.GetAllColorNames().Where(c => c.StartsWith("Dark")))
-                    {
-                        SetColourResource(current, thing, thing.Substring(4));
-                    }
-                }
-                else
-                {
-                    current.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri($"pack://application:,,,/{asm.Name};component/Themes/DarkColours.xaml", UriKind.Absolute) });
-                }
+                colourResources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri($"pack://application:,,,/{asm.Name};component/Themes/DarkColours.xaml", UriKind.Absolute) });
             }
 
             var accent = config.GetAccentColour();
             var accentLightness = 0.299 * ((double)accent.R / 255) + 0.587 * ((double)accent.G / 255) + 0.114 * ((double)accent.B / 255);
 
-            current["SystemAccentColor"] = accent;
+            colourResources["SystemAccentColor"] = accent;
 
-            current["SystemAccentLighten3Brush"] = new SolidColorBrush(accent.Lighten(0.6f));
-            current["SystemAccentLighten2Brush"] = new SolidColorBrush(accent.Lighten(0.4f));
-            current["SystemAccentLighten1Brush"] = new SolidColorBrush(accent.Lighten(0.2f));
-            current["SystemAccentBrush"] = new SolidColorBrush(accent);
-            current["SystemAccentDarken1Brush"] = new SolidColorBrush(accent.Darken(0.2f));
-            current["SystemAccentDarken2Brush"] = new SolidColorBrush(accent.Darken(0.4f));
-            current["SystemAccentDarken3Brush"] = new SolidColorBrush(accent.Darken(0.6f));
+            colourResources["SystemAccentLighten3Brush"] = new SolidColorBrush(accent.Lighten(0.6f));
+            colourResources["SystemAccentLighten2Brush"] = new SolidColorBrush(accent.Lighten(0.4f));
+            colourResources["SystemAccentLighten1Brush"] = new SolidColorBrush(accent.Lighten(0.2f));
+            colourResources["SystemAccentBrush"] = new SolidColorBrush(accent);
+            colourResources["SystemAccentDarken1Brush"] = new SolidColorBrush(accent.Darken(0.2f));
+            colourResources["SystemAccentDarken2Brush"] = new SolidColorBrush(accent.Darken(0.4f));
+            colourResources["SystemAccentDarken3Brush"] = new SolidColorBrush(accent.Darken(0.6f));
 
-            current["SystemAccentForegroundBrush"] = new SolidColorBrush(accentLightness > 0.5 ? Colors.Black : Colors.White);
-            current["SystemAccentBackgroundBrush"] = new SolidColorBrush(accent) { Opacity = 0.5 };
-
-            if (!config.NoLoad)
-                current.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri($"pack://application:,,,/{asm.Name};component/Themes/All.xaml", UriKind.Absolute) });
+            colourResources["SystemAccentForegroundBrush"] = new SolidColorBrush(accentLightness > 0.5 ? Colors.Black : Colors.White);
+            colourResources["SystemAccentBackgroundBrush"] = new SolidColorBrush(accent) { Opacity = 0.5 };
+            return colourResources;
         }
 
         private static void SetColourResource(ResourceDictionary current, string colour, string trimmed)
@@ -161,24 +163,24 @@ namespace WamWooWam.Wpf
         {
             if (AccentColour == null)
             {
-                if (Misc.IsWindows10)
+                if (OSVersion.IsWindows10)
                 {
                     try
                     {
-                        AccentColour = AccentColorSet.ActiveSet["SystemAccent"];
+                        return AccentColorSet.ActiveSet["SystemAccent"];
                     }
                     catch
                     {
-                        AccentColour = Color.FromRgb(0x00, 0x78, 0xD7); // default blue
+                        return Color.FromRgb(0x00, 0x78, 0xD7); // default blue
                     }
                 }
-                else if (Misc.IsWindows8 || Misc.IsWindows7)
+                else if (OSVersion.IsWindows8 || OSVersion.IsWindows7)
                 {
-                    AccentColour = SystemParameters.WindowGlassColor;
+                    return SystemParameters.WindowGlassColor;
                 }
                 else
                 {
-                    AccentColour = Color.FromRgb(0x00, 0x78, 0xD7); // default blue
+                    return Color.FromRgb(0x00, 0x78, 0xD7); // default blue
                 }
             }
 
@@ -189,22 +191,22 @@ namespace WamWooWam.Wpf
         {
             if (ColourMode == ThemeColourMode.Automatic)
             {
-                if (Misc.IsWindows10)
+                if (OSVersion.IsWindows10)
                 {
                     try
                     {
                         var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize");
                         var pkey = int.Parse(key.GetValue("AppsUseLightTheme", "1").ToString());
-                        ColourMode = pkey != 0 ? ThemeColourMode.Light : ThemeColourMode.Dark;
+                        return pkey != 0 ? ThemeColourMode.Light : ThemeColourMode.Dark;
                     }
                     catch
                     {
-                        ColourMode = ThemeColourMode.Light;
+                        return ThemeColourMode.Light;
                     }
                 }
                 else
                 {
-                    ColourMode = ThemeColourMode.Light;
+                    return ThemeColourMode.Light;
                 }
             }
 
