@@ -40,7 +40,7 @@ If you want a little more control over how things look, you can use the new `The
 var config = new ThemeConfiguration
 {
     ColourMode = ThemeColourMode.Light,
-    AccentColour = Color.FromArgb(0xFF, 0x72, 0x89, 0xDA),
+    AccentColour = Color.FromArgb(0xFF, 0x72, 0x89, 0xDA), // Discord Blurple
     FontFamily = new FontFamily("Comic Sans MS"),
     FontSize = 14
 };
@@ -49,3 +49,13 @@ Themes.SetTheme(config);
 ```
 
 This class is also, theoretically, serialisable, meaning it's probably possible to store it as a JSON or XML document for easy saving of user settings. I haven't tested this, however.
+
+#### Windows and Pages
+Windows and Pages have, by default, white and transparent backgrounds respectively. Default themes are also quite iffy when it comes to these two, so, you have to apply styles to these elements manually. Specifically `WindowStyle` for windows, and `PageStyle` for pages that can have transparent backgrounds, or `FullPageStyle` for pages that need a background colour. 
+
+```xml
+<Window ...
+        Style="{DynamicResource WindowStyle}">
+    
+</Window>
+        
