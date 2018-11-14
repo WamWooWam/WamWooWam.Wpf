@@ -58,4 +58,4 @@ Windows and Pages have, by default, white and transparent backgrounds respective
         Style="{DynamicResource WindowStyle}">
     
 </Window>
-        
+```
